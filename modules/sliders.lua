@@ -11,7 +11,7 @@ function slider.new(x, y, w, h, txt)
 	self.h = h or 8
 	self.txt = txt or ''
 	self.color = {.5, .5, .5}
-	self.zindex = #libuton._registry
+	self.zindex = #LuvKit._registry
 	self.cursor_w = .1*self.w
 	self.cursor_h = 1.5*self.h
 	self.cursor_x = self.x + self.w/2-self.cursor_w/2
@@ -34,14 +34,14 @@ function slider.new(x, y, w, h, txt)
 	return self
 end
 function slider:update(dt)
-	if libuton.collision(self.x, self.y, self.w, self.h, love.mouse.getX(), love.mouse.getY(), 1, 1) then
+	if LuvKit.collision(self.x, self.y, self.w, self.h, love.mouse.getX(), love.mouse.getY(), 1, 1) then
 		self.hover = true
 
 	else
 		self.hover = false
 	end
 
-	if libuton.collision(self.cursor_x, self.cursor_y, self.cursor_w, self.cursor_h, love.mouse.getX(), love.mouse.getY(), 1, 1) then
+	if LuvKit.collision(self.cursor_x, self.cursor_y, self.cursor_w, self.cursor_h, love.mouse.getX(), love.mouse.getY(), 1, 1) then
 		self.cursor_hover = true
 
 	else
@@ -49,7 +49,7 @@ function slider:update(dt)
 	end
 
 	if self.isClicked then
-		self.cursor_x= libuton.clamp(self.x,love.mouse.getX(),self.x+self.w-self.cursor_w)
+		self.cursor_x= LuvKit.clamp(self.x,love.mouse.getX(),self.x+self.w-self.cursor_w)
 	end
 
 
@@ -88,7 +88,7 @@ function slider:mousepressed(x, y, button)
     if button == 1 and self.cursor_hover then
        -- self:setOnClick()
        self.isClicked = true
-      -- self.cursor_x= libuton.clamp(self.x,love.mouse.getX(),self.x+self.w+self.cursor_w)
+      -- self.cursor_x= LuvKit.clamp(self.x,love.mouse.getX(),self.x+self.w+self.cursor_w)
     
    -- else self.isClicked = false
     end
