@@ -1,22 +1,23 @@
-libuton = {}
-libuton._registry = setmetatable({}, { __mode = "v" })
-libuton.modules = {}
-libuton.modules.button = require('libuton.modules.button')
-libuton.font = love.graphics.newFont()
+LuvKit = {}
+LuvKit._registry = setmetatable({}, { __mode = "v" })
+LuvKit.modules = {}
+LuvKit.modules.button = require('LuvKit.modules.button')
+LuvKit.modules.checkBox = require('LuvKit.modules.checkBox')
+LuvKit.font = love.graphics.newFont()
 
 
-function libuton.create(element, ...)
-	local temp = libuton.modules[element].new(...)
-	table.insert(libuton._registry, temp)
+function LuvKit.create(element, ...)
+	local temp = LuvKit.modules[element].new(...)
+	table.insert(LuvKit._registry, temp)
 	return temp
 end
 
-function libuton.update(dt)
-	table.sort(libuton._registry, function(a, b)
+function LuvKit.update(dt)
+	table.sort(LuvKit._registry, function(a, b)
 		return (a.zindex or 0) > (b.zindex or 0)
 	end)
 	local hovered_found = false
-	for _, v in ipairs(libuton._registry) do
+	for _, v in ipairs(LuvKit._registry) do
 		local is_hovering = false
 		if not hovered_found and v.update then
 			is_hovering = v:update(dt)
@@ -30,45 +31,45 @@ function libuton.update(dt)
 	end
 end
 
-function libuton.draw()
-	function libuton.draw()
-	table.sort(libuton._registry, function(a, b)
+function LuvKit.draw()
+	function LuvKit.draw()
+	table.sort(LuvKit._registry, function(a, b)
 		return (a.zindex or 0) < (b.zindex or 0)
 	end)
 
-	for k, v in ipairs(libuton._registry) do
+	for k, v in ipairs(LuvKit._registry) do
 		v:draw()
 	end
 end
 
 end
 
-function libuton.mousepressed(x, y, b)
-	table.sort(libuton._registry, function(a, b)
+function LuvKit.mousepressed(x, y, b)
+	table.sort(LuvKit._registry, function(a, b)
 		return (a.zindex or 0) > (b.zindex or 0)
 	end)
 
-	for k, v in ipairs(libuton._registry) do
+	for k, v in ipairs(LuvKit._registry) do
 		local clicked = v:mousepressed(x, y, b)
 		if clicked then break end
 	end
 end
 
-function libuton.mousereleased(x, y, b)
-	table.sort(libuton._registry, function(a, b)
+function LuvKit.mousereleased(x, y, b)
+	table.sort(LuvKit._registry, function(a, b)
 		return (a.zindex or 0) > (b.zindex or 0)
 	end)
 
-	for k, v in ipairs(libuton._registry) do
+	for k, v in ipairs(LuvKit._registry) do
 		local released = v:mousereleased(x, y, b)
 		if released then break end
 	end
 end
 
-function libuton.destroy(element)
-	for i = #libuton._registry, 1, -1 do
-		if libuton._registry[i] == element then
-			table.remove(libuton._registry, i)
+function LuvKit.destroy(element)
+	for i = #LuvKit._registry, 1, -1 do
+		if LuvKit._registry[i] == element then
+			table.remove(LuvKit._registry, i)
 			for k in pairs(element) do
 				element[k] = nil
 			end
@@ -78,6 +79,6 @@ function libuton.destroy(element)
 	end
 end
 
-function libuton.collision(x1,y1,w1,h1, x2,y2,w2,h2)
+function LuvKit.collision(x1,y1,w1,h1, x2,y2,w2,h2)
   return x1 < x2+w2 and x2 < x1+w1 and y1 < y2+h2 and y2 < y1+h1
 end
