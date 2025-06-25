@@ -1,9 +1,9 @@
 LuvKit = {}
 LuvKit._registry = setmetatable({}, { __mode = "v" })
 LuvKit.modules = {}
-LuvKit.modules.button = require('LuvKit.modules.button')
-LuvKit.modules.checkBox = require('LuvKit.modules.checkBox')
-LuvKit.modules.sliders = require('LuvKit.modules.sliders')
+LuvKit.modules.button = require('modules.button')
+LuvKit.modules.checkBox = require('modules.checkBox')
+LuvKit.modules.sliders = require('modules.sliders')
 LuvKit.font = love.graphics.newFont()
 
 

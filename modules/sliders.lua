@@ -78,11 +78,12 @@ function slider:draw()
 		-- body
 
 -- curseur
-		if self.cursor_hover then
+		--if self.cursor_hover then
 			love.graphics.setColor(self.options.clickColor)
 			love.graphics.rectangle('fill', self.cursor_x, self.cursor_y, self.cursor_w, self.cursor_h,self.options.radius, self.options.radius)	
-		end
+		--end
 	end
+	love.graphics.setColor(1,1,1)
 end
 
 function slider:mousepressed(x, y, button)
@@ -94,7 +95,7 @@ function slider:mousepressed(x, y, button)
 
 end
 
-function slider:mouserealeased(x,y, button)
+function slider:mousereleased(x,y, button)
 	self.isClicked=false
 end
 
@@ -107,3 +108,4 @@ function slider:getValue()
     return (self.cursor_x - self.x) / self.w
 end
 
+return slider

@@ -71,6 +71,7 @@ function button:draw()
 			love.graphics.printf(self.txt, LuvKit.font, self.x, self.y+self.h/2-LuvKit.font:getHeight()/2, self.w, 'center')
 		end
 	end
+	love.graphics.setColor(1,1,1)
 end
 
 function button:mousepressed(x, y, b)
