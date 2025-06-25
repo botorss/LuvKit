@@ -3,6 +3,7 @@ LuvKit._registry = setmetatable({}, { __mode = "v" })
 LuvKit.modules = {}
 LuvKit.modules.button = require('LuvKit.modules.button')
 LuvKit.modules.checkBox = require('LuvKit.modules.checkBox')
+LuvKit.modules.sliders = require('LuvKit.modules.sliders')
 LuvKit.font = love.graphics.newFont()
 
 
@@ -82,3 +83,5 @@ end
 function LuvKit.collision(x1,y1,w1,h1, x2,y2,w2,h2)
   return x1 < x2+w2 and x2 < x1+w1 and y1 < y2+h2 and y2 < y1+h1
 end
+
+function LuvKit.clamp(low, n, high) return math.min(math.max(low, n), high) end
