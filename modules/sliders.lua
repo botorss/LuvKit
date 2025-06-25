@@ -61,50 +61,48 @@ function slider:draw()
 
 --course slider
 	if self.hover ==false then
-	love.graphics.setColor(self.options.bgColor)
-	love.graphics.rectangle('fill', self.x, self.y, self.w, self.h,self.options.radius, self.options.radius)
-	-- body
+		love.graphics.setColor(self.options.bgColor)
+		love.graphics.rectangle('fill', self.x, self.y, self.w, self.h,self.options.radius, self.options.radius)
+		-- body
 
 -- curseur
 
-	love.graphics.setColor(self.options.fgColor)
-	love.graphics.rectangle('fill', self.cursor_x, self.cursor_y, self.cursor_w, self.cursor_h,self.options.radius, self.options.radius)
+		love.graphics.setColor(self.options.fgColor)
+		love.graphics.rectangle('fill', self.cursor_x, self.cursor_y, self.cursor_w, self.cursor_h,self.options.radius, self.options.radius)
 
 -- survol avec mise en évidence
 	elseif self.hover then
 
-	love.graphics.setColor(self.options.hbgColor)
-	love.graphics.rectangle('fill', self.x, self.y, self.w, self.h,self.options.radius, self.options.radius)
-	-- body
+		love.graphics.setColor(self.options.hbgColor)
+		love.graphics.rectangle('fill', self.x, self.y, self.w, self.h,self.options.radius, self.options.radius)
+		-- body
 
 -- curseur
-
-	love.graphics.setColor(self.options.hfgColor)
-	love.graphics.rectangle('fill', self.cursor_x, self.cursor_y, self.cursor_w, self.cursor_h,self.options.radius, self.options.radius)	
-end
+		if self.cursor_hover then
+			love.graphics.setColor(self.options.clickColor)
+			love.graphics.rectangle('fill', self.cursor_x, self.cursor_y, self.cursor_w, self.cursor_h,self.options.radius, self.options.radius)	
+		end
+	end
 end
 
 function slider:mousepressed(x, y, button)
     if button == 1 and self.cursor_hover then
-       -- self:setOnClick()
+      
        self.isClicked = true
-      -- self.cursor_x= LuvKit.clamp(self.x,love.mouse.getX(),self.x+self.w+self.cursor_w)
-    
-   -- else self.isClicked = false
+      
     end
 
 end
 
 function slider:mouserealeased(x,y, button)
-
 	self.isClicked=false
-	-- body
 end
 
 
 function slider:setOnClick(callback)
     self.onClick = callback
 end
+
 function slider:getValue()
     return (self.cursor_x - self.x) / self.w
 end
