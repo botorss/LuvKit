@@ -4,6 +4,8 @@ LuvKit.modules = {}
 LuvKit.modules.button = require('modules.button')
 LuvKit.modules.checkBox = require('modules.checkBox')
 LuvKit.modules.sliders = require('modules.sliders')
+LuvKit.modules.dropdown =require('modules.dropdown')
+LuvKit.modules.context_menu = require('modules.context_menu')
 LuvKit.font = love.graphics.newFont()
 
 
