@@ -6,6 +6,7 @@ LuvKit.modules.checkBox = require('modules.checkBox')
 LuvKit.modules.sliders = require('modules.sliders')
 LuvKit.modules.dropdown =require('modules.dropdown')
 LuvKit.modules.context_menu = require('modules.context_menu')
+LuvKit.modules.textInput = require('modules.textInput')
 LuvKit.font = love.graphics.newFont()
 
 
@@ -67,6 +68,14 @@ function LuvKit.mousereleased(x, y, b)
 		local released = v:mousereleased(x, y, b)
 		if released then break end
 	end
+end
+
+function LuvKit.keypressed(key)
+    for _, v in ipairs(LuvKit._registry) do
+        if v.keypressed then
+            v:keypressed(key)
+        end
+    end
 end
 
 function LuvKit.destroy(element)

@@ -86,6 +86,10 @@ function context_menu:mousepressed(x, y, button)
     end
 end
 
+function context_menu:mousereleased(x,y,button)
+    -- body
+end
+
 function context_menu:textinput(t)
     if self.inputActive then
         self.inputText = self.inputText .. t

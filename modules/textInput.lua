@@ -7,8 +7,10 @@ textInput.__index = textInput
 backgroundColor = {.4,.4,.4}
 backgroundColor_Highlighted = {.7,.7,.7}
 outlineColor = {.9,.9,.9}
+textColor = {.85,.85,.85}
+textColor_writing = {.2,.2,.2}
 
-function textInput:new(x,y,w,label)
+function textInput.new(x,y,w,label)
 
 	local self = setmetatable({}, textInput)
 		self.x = x
@@ -21,16 +23,44 @@ function textInput:new(x,y,w,label)
 		self.label = label or ''
 		self.text = ''
 	-- body
+
+	return self
 end
 
 function textInput:draw()
 
-love.graphics.setColor(backgroundColor)
-love.graphics.rectangle('fill',self.x, self.y, self.w, self.h)
-love.graphics.setColor(outlineColor)
-love.graphics.rectangle('line',self.x, self.y, self.w, self.h)
+	local font = love.graphics.getFont()
+	local textHeight = font:getHeight()
+	local centerY = self.y + (self.h - textHeight) / 2
 
-	-- body
+	love.graphics.setColor(backgroundColor)
+	love.graphics.rectangle('fill',self.x, self.y, self.w, self.h)
+
+	if self.hover then
+		love.graphics.setColor(outlineColor)
+		love.graphics.rectangle('line',self.x, self.y, self.w, self.h)
+	end
+	--love.graphics.print(tostring(self.inputActive))
+
+	if self.inputActive then
+		love.graphics.print(tostring(self.inputActive))
+	    love.graphics.setColor(backgroundColor_Highlighted)
+	    love.graphics.rectangle('fill',self.x, self.y, self.w, self.h)
+	    love.graphics.setColor(textColor_writing)
+	    love.graphics.printf(self.text, self.x+3, centerY,self.w,'left')
+	    love.graphics.setColor(1,1,1)
+	end
+	if not self.inputActive and self.text == '' then
+		love.graphics.setColor(textColor)
+		love.graphics.printf(self.label, self.x+3, centerY,self.w,'left')
+
+	elseif not self.inputActive then
+		love.graphics.setColor(textColor)
+		love.graphics.printf(self.text, self.x+3, centerY,self.w,'left')
+	end
+
+
+		-- body
 end
 
 function textInput:update()
@@ -41,20 +71,26 @@ function textInput:update()
 		self.hover = false 
 	end
 	-- body
+	return self.hover
 end
 
-function textInput.mousepressed(x,y, button)
-
+function textInput:mousepressed(x,y, button)
 	if self.hover and button==1 then
-		self.inputActive = true
+		self.inputActive = not self.inputActive
 	-- body
 	else self.hover = false 
 	end
 
 	if not self.hover and button==1 then
 		self.inputActive = false
+	end
+
 end
 
+function textInput:mousereleased(x,y,button)
+
+
+end
 function textInput.collision(x1,y1,w1,h1,x2,y2,w2,h2)
 	  return x1 < x2+w2 and
          x2 < x1+w1 and
@@ -62,16 +98,32 @@ function textInput.collision(x1,y1,w1,h1,x2,y2,w2,h2)
          y2 < y1+h1
 end
 
+function textInput:keypressed(key)
+
+	if key == 'return' and self.inputActive then
+		self.inputActive = false
+		--textInput:callback()
+	end
+	if key == 'backspace' and self.inputActive then
+			self.text = self.text:sub(1, #self.text-1)
+	end
+end
+
 function textInput:textinput(text)
 
 	if self.inputActive then
 
 		self.text = self.text..text
+
+
 	-- body
+	end
 end
 
 function textInput:callback()
 
 	return self.text 
 end
+
+return textInput
 	
