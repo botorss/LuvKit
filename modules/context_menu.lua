@@ -37,7 +37,7 @@ function context_menu:hide()
 end
 
 function context_menu:update(dt)
-    if not self.visible then return end
+    if not self.visible or not self.items then return end
 
     local mx, my = love.mouse.getX(), love.mouse.getY()
     self.hover = mx >= self.x and mx <= self.x + self.w and my >= self.y and my <= self.y + #self.items * self.itemHeight
