@@ -120,7 +120,7 @@ function textInput:textinput(text)
 	end
 end
 
-function textInput:callback()
+function textInput:getValue()
 
 	return self.text 
 end
