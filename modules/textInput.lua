@@ -1,11 +1,11 @@
 -- text input
 
-textInput = {}
+local textInput = {}
 
 textInput.__index = textInput
 
-backgroundColor = {.4,.4,.4}
-backgroundColor_Highlighted = {.7,.7,.7}
+textInput.backgroundColor = {.4,.4,.4}
+textInput.backgroundColor_Highlighted = {.7,.7,.7}
 outlineColor = {.9,.9,.9}
 textColor = {.85,.85,.85}
 textColor_writing = {.2,.2,.2}
@@ -33,7 +33,7 @@ function textInput:draw()
 	local textHeight = font:getHeight()
 	local centerY = self.y + (self.h - textHeight) / 2
 
-	love.graphics.setColor(backgroundColor)
+	love.graphics.setColor(textInput.backgroundColor)
 	love.graphics.rectangle('fill',self.x, self.y, self.w, self.h)
 
 	if self.hover then
@@ -44,7 +44,7 @@ function textInput:draw()
 
 	if self.inputActive then
 		love.graphics.print(tostring(self.inputActive))
-	    love.graphics.setColor(backgroundColor_Highlighted)
+	    love.graphics.setColor(textInput.backgroundColor_Highlighted)
 	    love.graphics.rectangle('fill',self.x, self.y, self.w, self.h)
 	    love.graphics.setColor(textColor_writing)
 	    love.graphics.printf(self.text, self.x+3, centerY,self.w,'left')

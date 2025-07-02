@@ -1,4 +1,4 @@
-checkBox = {}
+local checkBox = {}
 checkBox.__index = checkBox
 
 function checkBox.new(x, y, w, h, txt)

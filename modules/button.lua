@@ -1,4 +1,4 @@
-button = {}
+local button = {}
 button.__index = button
 
 function button.new(x, y, w, h, txt)
