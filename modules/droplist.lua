@@ -132,6 +132,9 @@ function droplist:setActive(bool)		self.active = bool end
 function droplist:setVisible(bool) 	self.visible = bool end
 function droplist:setZindex(n) 		self.zindex = n end
 function droplist:setCallback(foo) 	self.callback = foo end
+function droplist:setList(tab)		self.list = tab end
+function droplist:addToList(val)	table.insert(self.list, val) end
+function droplist:rmInList(key)		table.remove(self.list, key) end
 
 function droplist:getPos() 		return self.x, self.y end
 function droplist:getX() 			return self.x end
