@@ -21,7 +21,7 @@ function button.new(x, y, w, h, txt)
 		houtlineColor = {1, 1, 1},
 		clickColor = {.8, .8, .8},
 		outline = true,
-		radius = 4,
+		radius = 0,
 	}
 	self.callback = nil
 	return self
@@ -85,7 +85,7 @@ function button:mousereleased(x, y, b)
 		end
 	end
 end
-
+-----------------------------------------------------------------
 function button:setOptions(tab)
 	for k, v in pairs(tab) do
 		if self.options[k] then
@@ -94,22 +94,27 @@ function button:setOptions(tab)
 	end
 end
 
-function button:setPos(x, y) self.x = x;self.y = y end
-function button:setX(x)	self.x = x end
-function button:setY(y)	self.y = y end
-function button:setActive(bool)	self.active = bool end
-function button:setVisible(bool) self.visible = bool end
-function button:getPos() return self.x, self.y end
-function button:getX() return self.x end
-function button:getY() return self.y end
-function button:getOptions() return self.options end
-function button:getActive() return self.active end
-function button:getVisible() return self.visible end
-function button:getHover() return self.hover end
+function button:setPos(x, y) 		self.x = x;self.y = y end
+function button:setX(x)				self.x = x end
+function button:setY(y)				self.y = y end
+function button:setWidth(w)			self.w = w end
+function button:setHeight(h)		self.h = h end
+function button:setActive(bool)		self.active = bool end
+function button:setVisible(bool) 	self.visible = bool end
+function button:setZindex(n) 		self.zindex = n end
+function button:setCallback(foo) 	self.callback = foo end
 
-function button:setZindex(n) self.zindex = n end
-function button:getZindex() return self.zindex end
-function button:destroy() LuvKit.destroy(self) end
-function button:setCallback(foo) self.callback = foo end
+function button:getPos() 		return self.x, self.y end
+function button:getX() 			return self.x end
+function button:getY() 			return self.y end
+function button:getWidth() 		return self.w end
+function button:getHeight() 	return self.h end
+function button:getOptions() 	return self.options end
+function button:getActive() 	return self.active end
+function button:getVisible() 	return self.visible end
+function button:getHover() 		return self.hover end
+function button:getZindex() 	return self.zindex end
+
+function button:destroy() 		LuvKit.destroy(self) end
 
 return button

@@ -2,12 +2,13 @@ LuvKit = {}
 LuvKit._registry = setmetatable({}, { __mode = "v" })
 LuvKit.modules = {}
 LuvKit.modules.button = require('modules.button')
+LuvKit.modules.droplist = require('modules.droplist')
 LuvKit.modules.checkBox = require('modules.checkBox')
 LuvKit.modules.sliders = require('modules.sliders')
 LuvKit.modules.dropdown =require('modules.dropdown')
 LuvKit.modules.context_menu = require('modules.context_menu')
 LuvKit.modules.textInput = require('modules.textInput')
-LuvKit.font = love.graphics.newFont()
+LuvKit.font = love.graphics.newFont('DejaVuSansMono-ASCII-Triangles.ttf')
 
 
 function LuvKit.create(element, ...)

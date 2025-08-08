@@ -3,16 +3,9 @@ require('LuvKit')
 
 
 function love.load()
-s1= LuvKit.create('sliders',100,100,100,15)
-b1= LuvKit.create('button', 100,130,100,20,'test')
-b1:setCallback(test() )
-d1 = LuvKit.create("dropdown", 100, 160, 100, 20, {"Option 1", "Option 2", "Option 3"})
---d1.callback = love.graphics.print("Hello !",.5*love.graphics.getWidth(),.5*love.graphics.getHeight())
-myMenu = LuvKit.create("context_menu", 100, 220, 220, {
-    { label = "Afficher Bonjour", type = "action", callback = function() love.graphics.print("Hello !",.5*love.graphics.getWidth(),.5*love.graphics.getHeight()) end },
-    { label = "Changer une variable", type = "input", callback = function(text) print("Entrée :", text) end }
-})
-t2 = LuvKit.create("textInput",100,190,100,'Champ Texte')
+b1= LuvKit.create('button', 100,130,100,20,'Button 1')
+
+dl1 = LuvKit.create('droplist', 100, 200, 100, 20, 'List 1')
 
 end
 
