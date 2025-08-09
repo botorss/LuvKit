@@ -6,7 +6,7 @@ function slider.new(x, y, w, h, min, max)
 	self.x = x
 	self.y = y
 	self.w = math.max(w or 0, 100)
-	self.h = math.max(h or 0, math.floor(LuvKit.defaultH/2)*1)
+	self.h = math.max(h or 0, math.floor(LuvKit.defaultH/3)*2)
 	self.slidPos = 0
 	self.hover = false
 	self.visible = true

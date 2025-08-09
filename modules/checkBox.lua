@@ -5,8 +5,8 @@ function checkbox.new(x, y, w, h)
 	local self = setmetatable({}, checkbox)
 	self.x = x
 	self.y = y
-	self.w = LuvKit.defaultW/2
-	self.h = LuvKit.defaultH/2
+	self.w = (LuvKit.defaultW/3) * 2
+	self.h = (LuvKit.defaultH/3) * 2
 	self.check = false
 	self.zindex = #LuvKit._registry
 	self.options = {
