@@ -5,23 +5,23 @@ function button.new(x, y, w, h, txt)
 	local self = setmetatable({}, button)
 	self.x = x
 	self.y = y
-	self.w = math.max(w, LuvKit.font:getWidth(txt)+5)
-	self.h = math.max(h, LuvKit.font:getHeight())
+	self.w = math.max(w, LuvKit.defaultW)
+	self.h = math.max(h, LuvKit.defaultH)
 	self.hover = false
 	self.visible = true
 	self.active = true
 	self.txt = txt or ''
 	self.zindex = #LuvKit._registry
 	self.options = {
-		bgColor = {0.5, 0.5, 0.5},
-		fgColor = {0, 0, 0},
-		outlineColor = {0, 0, 0},
-		hbgColor = {0.7, 0.7, 0.7},
-		hfgColor = {0, 0, 0},
-		houtlineColor = {1, 1, 1},
-		clickColor = {.8, .8, .8},
-		outline = true,
-		radius = 0,
+		bgColor = LuvKit.defaultOptions.bgColor,
+		fgColor = LuvKit.defaultOptions.fgColor,
+		outlineColor = LuvKit.defaultOptions.outlineColor,
+		hbgColor = LuvKit.defaultOptions.hbgColor,
+		hfgColor = LuvKit.defaultOptions.hfgColor,
+		houtlineColor = LuvKit.defaultOptions.houtlineColor,
+		clickColor = LuvKit.defaultOptions.clickColor,
+		outline = LuvKit.defaultOptions.outline,
+		radius = LuvKit.defaultOptions.radius,
 	}
 	self.callback = nil
 	return self
@@ -47,8 +47,6 @@ function button:draw()
 			love.graphics.setLineWidth(1)
 			love.graphics.setColor(self.options.hbgColor)
 			love.graphics.rectangle('fill', self.x, self.y, self.w, self.h, self.options.radius)
-			love.graphics.setColor(self.options.hbgColor)
-			love.graphics.rectangle('line', self.x, self.y, self.w, self.h, self.options.radius)
 			if love.mouse.isDown(1) then
 				love.graphics.setColor(self.options.clickColor)
 				love.graphics.rectangle('fill', self.x, self.y, self.w, self.h, self.options.radius)
@@ -65,8 +63,6 @@ function button:draw()
 			love.graphics.setLineWidth(1)
 			love.graphics.setColor(self.options.bgColor)
 			love.graphics.rectangle('fill', self.x, self.y, self.w, self.h, self.options.radius)
-			love.graphics.setColor(self.options.bgColor)
-			love.graphics.rectangle('line', self.x, self.y, self.w, self.h, self.options.radius)
 			love.graphics.setColor(self.options.fgColor)
 			love.graphics.printf(self.txt, LuvKit.font, self.x, self.y+self.h/2-LuvKit.font:getHeight()/2, self.w, 'center')
 		end
@@ -75,7 +71,6 @@ function button:draw()
 end
 
 function button:mousepressed(x, y, b)
-
 end
 
 function button:mousereleased(x, y, b)
@@ -103,6 +98,7 @@ function button:setActive(bool)		self.active = bool end
 function button:setVisible(bool) 	self.visible = bool end
 function button:setZindex(n) 		self.zindex = n end
 function button:setCallback(foo) 	self.callback = foo end
+function button:setLabel(label)		self.txt = label end
 
 function button:getPos() 		return self.x, self.y end
 function button:getX() 			return self.x end
@@ -114,6 +110,7 @@ function button:getActive() 	return self.active end
 function button:getVisible() 	return self.visible end
 function button:getHover() 		return self.hover end
 function button:getZindex() 	return self.zindex end
+function button:getLabel()		return self.txt end
 
 function button:destroy() 		LuvKit.destroy(self) end
 

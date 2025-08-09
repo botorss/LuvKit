@@ -3,12 +3,28 @@ LuvKit._registry = setmetatable({}, { __mode = "v" })
 LuvKit.modules = {}
 LuvKit.modules.button = require('modules.button')
 LuvKit.modules.droplist = require('modules.droplist')
-LuvKit.modules.checkBox = require('modules.checkBox')
+LuvKit.modules.checkbox = require('modules.checkbox')
 LuvKit.modules.sliders = require('modules.sliders')
+LuvKit.modules.slider = require('modules.slider')
 LuvKit.modules.dropdown =require('modules.dropdown')
 LuvKit.modules.context_menu = require('modules.context_menu')
 LuvKit.modules.textInput = require('modules.textInput')
 LuvKit.font = love.graphics.newFont('DejaVuSansMono-ASCII-Triangles.ttf')
+LuvKit.defaultH = 24
+LuvKit.defaultW = 24
+LuvKit.defaultOptions = {
+	bgColor = {0.5, 0.5, 0.5},
+	fgColor = {0, 0, 0},
+	outlineColor = {0, 0, 0},
+	hbgColor = {0.7, 0.7, 0.7},
+	hfgColor = {0, 0, 0},
+	houtlineColor = {1, 1, 1},
+	clickColor = {.8, .8, .8},
+	outline = true,
+	radius = 0,
+	sliderBackColor = {.3, .3, .3},
+	cursorColor = {1, 0, 0}
+}
 
 
 function LuvKit.create(element, ...)
@@ -68,6 +84,19 @@ function LuvKit.mousereleased(x, y, b)
 	for k, v in ipairs(LuvKit._registry) do
 		local released = v:mousereleased(x, y, b)
 		if released then break end
+	end
+end
+
+function LuvKit.mousemoved(x, y, dx, dy)
+	table.sort(LuvKit._registry, function(a, b)
+		return (a.zindex or 0) > (b.zindex or 0)
+	end)
+
+	for k, v in ipairs(LuvKit._registry) do
+		if v.mousemoved then
+			local moved = v:mousemoved(x, y, dx, dy)
+			if moved then break end
+		end
 	end
 end
 
