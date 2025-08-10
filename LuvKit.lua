@@ -14,9 +14,11 @@ LuvKit.modules.context_menu = require('modules.context_menu')
 LuvKit.modules.textInput = require('modules.textInput')
 LuvKit.modules.textbox = require('modules.textbox')
 LuvKit.modules.label = require('modules.label')
+LuvKit.modules.group = require('modules.group')
 LuvKit.font = love.graphics.newFont('DejaVuSansMono-ASCII-Triangles.ttf')
 LuvKit.defaultH = 18
 LuvKit.defaultW = 18
+LuvKit.gridU = LuvKit.defaultH/2
 utf8 = require("utf8")
 LuvKit.defaultOptions = {
 	bgColor = {0.5, 0.5, 0.5},
@@ -30,9 +32,11 @@ LuvKit.defaultOptions = {
 	radius = 0,
 	sliderBackColor = {.3, .3, .3},
 	cursorColor = {1, 0, 0},
-	textboxBackColor = {.1, .1, .1}
+	textboxBackColor = {.1, .1, .1},
+	groupColor = {.4, .4, .4}
 }
 
+function LuvKit.u(n) return LuvKit.gridU*n end
 
 function LuvKit.create(element, ...)
 	local temp = LuvKit.modules[element].new(...)
@@ -67,6 +71,13 @@ function LuvKit.draw()
 
 	for k, v in ipairs(LuvKit._registry) do
 		v:draw()
+		if v.active == false then
+			love.graphics.setColor(0, 0, 0, .5)
+			love.graphics.rectangle("fill", v.x, v.y, v.w, v.h)
+			love.graphics.setColor(1, 0, 0, .5)
+			love.graphics.line(v.x, v.y, v.x+v.w, v.y+v.h)
+			love.graphics.line(v.x, v.y+v.h, v.x+v.w, v.y)
+		end
 	end
 end
 
@@ -78,8 +89,12 @@ function LuvKit.mousepressed(x, y, b)
 	end)
 
 	for k, v in ipairs(LuvKit._registry) do
-		local clicked = v:mousepressed(x, y, b)
-		if clicked then break end
+		if v.active == true then
+			if v.visible == true then
+				local clicked = v:mousepressed(x, y, b)
+				if clicked then break end
+			end
+		end
 	end
 end
 
@@ -89,8 +104,12 @@ function LuvKit.mousereleased(x, y, b)
 	end)
 
 	for k, v in ipairs(LuvKit._registry) do
-		local released = v:mousereleased(x, y, b)
-		if released then break end
+		if v.active == true then
+			if v.visible == true then
+				local released = v:mousereleased(x, y, b)
+				if released then break end
+			end
+		end
 	end
 end
 
@@ -100,26 +119,38 @@ function LuvKit.mousemoved(x, y, dx, dy)
 	end)
 
 	for k, v in ipairs(LuvKit._registry) do
-		if v.mousemoved then
-			local moved = v:mousemoved(x, y, dx, dy)
-			if moved then break end
+		if v.active == true then
+			if v.visible == true then
+				if v.mousemoved then
+					local moved = v:mousemoved(x, y, dx, dy)
+					if moved then break end
+				end
+			end
 		end
 	end
 end
 
 function LuvKit.keypressed(key)
     for _, v in ipairs(LuvKit._registry) do
-        if v.keypressed then
-            v:keypressed(key)
-        end
+    	if v.active then
+    		if v.visible == true then
+		        if v.keypressed then
+		            v:keypressed(key)
+		        end
+		    end
+	    end
     end
 end
 
 function LuvKit.textinput(text)
 	for _, v in ipairs(LuvKit._registry) do
-        if v.textinput then
-            v:textinput(text)
-        end
+		if v.active then
+			if v.visible == true then
+		        if v.textinput then
+		            v:textinput(text)
+		        end
+		    end
+	    end
     end
 end
 

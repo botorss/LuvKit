@@ -5,6 +5,8 @@ function button.new(x, y, w, h, txt)
 	local self = setmetatable({}, button)
 	self.x = x
 	self.y = y
+	self.rx = x
+	self.ry = y
 	self.w = math.max(w, LuvKit.defaultW)
 	self.h = math.max(h, LuvKit.defaultH)
 	self.hover = false

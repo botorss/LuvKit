@@ -73,22 +73,23 @@ function textbox:draw()
 			love.graphics.setColor(self.options.textboxBackColor)
 			love.graphics.rectangle('fill', self.x, self.y, self.w, self.h, self.options.radius)
 		end
+		if #self.txt == 0 and self.textInputActif == false then
+			love.graphics.setColor(self.options.placeHolderColor)
+			love.graphics.printf(self.placeHolder, LuvKit.font, self.x+5, self.y+self.h/2-LuvKit.font:getHeight()/2, self.w-10, 'left')
+		end
+
+		if self.textInputActif then
+			if math.floor(self.timer) % 2 == 0 then
+				love.graphics.setColor(self.options.cursorColor)
+				love.graphics.printf('|', LuvKit.font, self.x+LuvKit.font:getWidth(self.txt)+2, self.y+self.h/2-LuvKit.font:getHeight()/2, self.w, 'left')
+			end
+		end
+
+		love.graphics.setColor(self.options.txtColor)
+		love.graphics.printf(self.txt, LuvKit.font, self.x+5, self.y+self.h/2-LuvKit.font:getHeight()/2, self.w-10, 'left')
 	end
 	
-	if #self.txt == 0 and self.textInputActif == false then
-		love.graphics.setColor(self.options.placeHolderColor)
-		love.graphics.printf(self.placeHolder, LuvKit.font, self.x+5, self.y+self.h/2-LuvKit.font:getHeight()/2, self.w-10, 'left')
-	end
-
-	if self.textInputActif then
-		if math.floor(self.timer) % 2 == 0 then
-			love.graphics.setColor(self.options.cursorColor)
-			love.graphics.printf('|', LuvKit.font, self.x+LuvKit.font:getWidth(self.txt)+2, self.y+self.h/2-LuvKit.font:getHeight()/2, self.w, 'left')
-		end
-	end
-
-	love.graphics.setColor(self.options.txtColor)
-	love.graphics.printf(self.txt, LuvKit.font, self.x+5, self.y+self.h/2-LuvKit.font:getHeight()/2, self.w-10, 'left')
+	
 	love.graphics.setColor(1,1,1)
 end
 

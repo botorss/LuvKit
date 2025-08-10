@@ -55,11 +55,12 @@ function label:draw()
 			love.graphics.setLineWidth(1)
 			
 		end
+		love.graphics.setColor(self.options.bgColor)
+		love.graphics.rectangle('fill', self.x, self.y, self.w, self.h, self.options.radius)
+		love.graphics.setColor(self.options.fgColor)
+		love.graphics.printf(self.txt, LuvKit.font, self.x+5, self.y+self.h/2-LuvKit.font:getHeight()/2, self.w-10, self.options.textAlign)
 	end
-	love.graphics.setColor(self.options.bgColor)
-	love.graphics.rectangle('fill', self.x, self.y, self.w, self.h, self.options.radius)
-	love.graphics.setColor(self.options.fgColor)
-	love.graphics.printf(self.txt, LuvKit.font, self.x+5, self.y+self.h/2-LuvKit.font:getHeight()/2, self.w-10, self.options.textAlign)
+	
 	love.graphics.setColor(1,1,1)
 end
 

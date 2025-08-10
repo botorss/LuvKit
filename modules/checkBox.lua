@@ -69,6 +69,7 @@ function checkbox:draw()
 			love.graphics.rectangle('line', self.x+2, self.y+2, self.w-4, self.h-4, self.options.radius-2, self.options.radius-2)
 		end
 	end
+	love.graphics.setColor(1, 1, 1)
 end
 
 function checkbox:mousepressed(x, y, b)

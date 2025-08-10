@@ -8,11 +8,13 @@ function love.load()
 
 	dl1 = LuvKit.create('droplist', 100, 140, 100, 0, 'Option 1')
 	dl1:addToList('Option 2', 'Option 3', 'Option 4')
+	dl1:setActive(true)
 
 	slid1 = LuvKit.create('slider', 210, 100+3, 400, 0, 40, 215)
 	slid1:setRange(20, 80)
 	slid1:setValue(40)
 	slid1:setOptions({showVal = false})
+	slid1:setActive(false)
 
 	slid2 = LuvKit.create('slider', 230, 70, 100)
 	slid2:setRange(0, 100)
@@ -22,14 +24,20 @@ function love.load()
 	chk = LuvKit.create('checkbox', 210, 140+3)
 	chk:setCheck(true)
 
-	slid3 = LuvKit.create('sliders', 100, 300, 400)
+	--slid3 = LuvKit.create('sliders', 100, 300, 400)
 
-	slid4 = LuvKit.create('sliders', 100, 330, 100, 40, 60)
+	--slid4 = LuvKit.create('sliders', 100, 330, 100, 40, 60)
 
 	txtbox1 = LuvKit.create('textbox', 230, 140, 200, 'Text...')
 
 	lbl = LuvKit.create("label", 230, 170, 150, 0, "Test label")
 
+
+	grp = LuvKit.create("group", 300, 300, 210, 18*8)
+	grp:addElement("bgrp1", "button", LuvKit.u(1), LuvKit.u(1), 50, 0, "Bgrp 1")
+	grp.elements.bgrp1:setCallback(function() print('click') end)
+
+	grp:addElement("sbgrp1", "slider", LuvKit.u(1), LuvKit.u(4)+3, 150)
 end
 
 function love.update(dt)
