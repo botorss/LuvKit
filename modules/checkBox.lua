@@ -7,6 +7,8 @@ function checkbox.new(x, y, w, h)
 	self.y = y
 	self.w = (LuvKit.defaultW/3) * 2
 	self.h = (LuvKit.defaultH/3) * 2
+	self.visible = true
+	self.active = true
 	self.check = false
 	self.zindex = #LuvKit._registry
 	self.options = {
@@ -33,40 +35,42 @@ function checkbox:update(dt)
 end
 
 function checkbox:draw()
-	if self.hover then
-		if self.options.outline then
-			love.graphics.setLineWidth(2)
-			love.graphics.setColor(self.options.houtlineColor)
-			love.graphics.rectangle('line', self.x, self.y, self.w, self.h, self.options.radius)
-		end
-		love.graphics.setLineWidth(1)
-		love.graphics.setColor(self.options.hbgColor)
-		love.graphics.rectangle('fill', self.x, self.y, self.w, self.h, self.options.radius)
-		if love.mouse.isDown(1) then
-			love.graphics.setColor(self.options.clickColor)
+	if self.visible then
+		if self.hover then
+			if self.options.outline then
+				love.graphics.setLineWidth(2)
+				love.graphics.setColor(self.options.houtlineColor)
+				love.graphics.rectangle('line', self.x, self.y, self.w, self.h, self.options.radius)
+			end
+			love.graphics.setLineWidth(1)
+			love.graphics.setColor(self.options.hbgColor)
 			love.graphics.rectangle('fill', self.x, self.y, self.w, self.h, self.options.radius)
-		end
+			if love.mouse.isDown(1) then
+				love.graphics.setColor(self.options.clickColor)
+				love.graphics.rectangle('fill', self.x, self.y, self.w, self.h, self.options.radius)
+			end
 
-		if self.check then
-			love.graphics.setColor(self.options.fgColor)
-			love.graphics.rectangle('fill', self.x+2, self.y+2, self.w-4, self.h-4, self.options.radius-2, self.options.radius-2)
-			love.graphics.rectangle('line', self.x+2, self.y+2, self.w-4, self.h-4, self.options.radius-2, self.options.radius-2)
-		end
-		
-	else
-		if self.options.outline then
-			love.graphics.setLineWidth(2)
-			love.graphics.setColor(self.options.outlineColor)
-			love.graphics.rectangle('line', self.x, self.y, self.w, self.h, self.options.radius)
-		end
-		love.graphics.setLineWidth(1)
-		love.graphics.setColor(self.options.bgColor)
-		love.graphics.rectangle('fill', self.x, self.y, self.w, self.h, self.options.radius)
+			if self.check then
+				love.graphics.setColor(self.options.fgColor)
+				love.graphics.rectangle('fill', self.x+2, self.y+2, self.w-4, self.h-4, self.options.radius-2, self.options.radius-2)
+				love.graphics.rectangle('line', self.x+2, self.y+2, self.w-4, self.h-4, self.options.radius-2, self.options.radius-2)
+			end
+			
+		else
+			if self.options.outline then
+				love.graphics.setLineWidth(2)
+				love.graphics.setColor(self.options.outlineColor)
+				love.graphics.rectangle('line', self.x, self.y, self.w, self.h, self.options.radius)
+			end
+			love.graphics.setLineWidth(1)
+			love.graphics.setColor(self.options.bgColor)
+			love.graphics.rectangle('fill', self.x, self.y, self.w, self.h, self.options.radius)
 
-		if self.check then
-			love.graphics.setColor(self.options.fgColor)
-			love.graphics.rectangle('fill', self.x+2, self.y+2, self.w-4, self.h-4, self.options.radius-2, self.options.radius-2)
-			love.graphics.rectangle('line', self.x+2, self.y+2, self.w-4, self.h-4, self.options.radius-2, self.options.radius-2)
+			if self.check then
+				love.graphics.setColor(self.options.fgColor)
+				love.graphics.rectangle('fill', self.x+2, self.y+2, self.w-4, self.h-4, self.options.radius-2, self.options.radius-2)
+				love.graphics.rectangle('line', self.x+2, self.y+2, self.w-4, self.h-4, self.options.radius-2, self.options.radius-2)
+			end
 		end
 	end
 	love.graphics.setColor(1, 1, 1)

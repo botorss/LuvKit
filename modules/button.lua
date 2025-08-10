@@ -76,7 +76,7 @@ function button:mousepressed(x, y, b)
 end
 
 function button:mousereleased(x, y, b)
-	if LuvKit.collision(self.x, self.y, self.w, self.h, x, y, 1, 1) and self.hover and self.active then
+	if LuvKit.collision(self.x, self.y, self.w, self.h, x, y, 1, 1) and self.hover then
 		if self.callback then
 			self.callback()
 		end

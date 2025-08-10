@@ -24,10 +24,6 @@ function love.load()
 	chk = LuvKit.create('checkbox', 210, 140+3)
 	chk:setCheck(true)
 
-	--slid3 = LuvKit.create('sliders', 100, 300, 400)
-
-	--slid4 = LuvKit.create('sliders', 100, 330, 100, 40, 60)
-
 	txtbox1 = LuvKit.create('textbox', 230, 140, 200, 'Text...')
 
 	lbl = LuvKit.create("label", 230, 170, 60, 0, "Test label")

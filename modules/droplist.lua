@@ -13,7 +13,7 @@ function droplist.new(x, y, w, h, value)
 	self.value = value or ''
 	self.zindex = #LuvKit._registry
 	self.open = false
-	self.list = {value}
+	self.list = {value or nil}
 	self.options = {
 		bgColor = LuvKit.defaultOptions.bgColor,
 		fgColor = LuvKit.defaultOptions.fgColor,
