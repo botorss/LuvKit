@@ -30,7 +30,7 @@ function love.load()
 
 	txtbox1 = LuvKit.create('textbox', 230, 140, 200, 'Text...')
 
-	lbl = LuvKit.create("label", 230, 170, 150, 0, "Test label")
+	lbl = LuvKit.create("label", 230, 170, 60, 0, "Test label")
 
 
 	grp = LuvKit.create("group", 300, 300, 210, 18*8)

@@ -1,17 +1,17 @@
 local label = {}
 label.__index = label
 
-function label.new(x, y, w, h, txt)
+function label.new(x, y, w, h, txt, alignMode)
 	local self = setmetatable({}, label)
 	self.x = x
 	self.y = y
-	self.w = math.max(w, LuvKit.defaultW)
-	self.h = math.max(h, LuvKit.defaultH)
+	self.w = math.max(w or 0, 100)
+	self.h = math.max(h or 0, math.floor(LuvKit.defaultH/3)*2)
 	self.hover = false
 	self.visible = true
 	self.active = true
 	self.txt = txt or ''
-	self.alignMode = "left"
+	self.alignMode = alignMode or "center"
 	self.zindex = #LuvKit._registry
 	self.options = {
 		bgColor = LuvKit.defaultOptions.bgColor,
@@ -58,7 +58,7 @@ function label:draw()
 		love.graphics.setColor(self.options.bgColor)
 		love.graphics.rectangle('fill', self.x, self.y, self.w, self.h, self.options.radius)
 		love.graphics.setColor(self.options.fgColor)
-		love.graphics.printf(self.txt, LuvKit.font, self.x+5, self.y+self.h/2-LuvKit.font:getHeight()/2, self.w-10, self.options.textAlign)
+		love.graphics.printf(self.txt, LuvKit.font, self.x+5, self.y+self.h/2-LuvKit.font:getHeight()/2, self.w-10, self.alignMode)
 	end
 	
 	love.graphics.setColor(1,1,1)
