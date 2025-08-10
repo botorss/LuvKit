@@ -1,3 +1,6 @@
+utf8 = require("utf8")
+love.keyboard.setKeyRepeat(true)
+
 LuvKit = {}
 LuvKit._registry = setmetatable({}, { __mode = "v" })
 LuvKit.modules = {}
@@ -9,9 +12,12 @@ LuvKit.modules.slider = require('modules.slider')
 LuvKit.modules.dropdown =require('modules.dropdown')
 LuvKit.modules.context_menu = require('modules.context_menu')
 LuvKit.modules.textInput = require('modules.textInput')
+LuvKit.modules.textbox = require('modules.textbox')
+LuvKit.modules.label = require('modules.label')
 LuvKit.font = love.graphics.newFont('DejaVuSansMono-ASCII-Triangles.ttf')
 LuvKit.defaultH = 18
 LuvKit.defaultW = 18
+utf8 = require("utf8")
 LuvKit.defaultOptions = {
 	bgColor = {0.5, 0.5, 0.5},
 	fgColor = {0, 0, 0},
@@ -23,7 +29,8 @@ LuvKit.defaultOptions = {
 	outline = true,
 	radius = 0,
 	sliderBackColor = {.3, .3, .3},
-	cursorColor = {1, 0, 0}
+	cursorColor = {1, 0, 0},
+	textboxBackColor = {.1, .1, .1}
 }
 
 
@@ -104,6 +111,14 @@ function LuvKit.keypressed(key)
     for _, v in ipairs(LuvKit._registry) do
         if v.keypressed then
             v:keypressed(key)
+        end
+    end
+end
+
+function LuvKit.textinput(text)
+	for _, v in ipairs(LuvKit._registry) do
+        if v.textinput then
+            v:textinput(text)
         end
     end
 end
