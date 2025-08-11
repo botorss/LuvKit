@@ -39,7 +39,9 @@ end
 function textbox:update(dt)
 	self.timer = self.timer + dt*5
 	if LuvKit.collision(self.x, self.y, self.w, self.h, love.mouse.getX(), love.mouse.getY(), 1, 1) then
-		self.hover = true
+		if LuvKit.hold == false then
+			self.hover = true
+		end
 	else
 		self.hover = false
 	end

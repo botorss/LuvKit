@@ -34,17 +34,32 @@ function love.load()
 	grp.elements.bgrp1:setCallback(function() print('click') end)
 
 	grp:addElement("sbgrp1", "slider", LuvKit.u(1), LuvKit.u(4)+3, 150)
+
+	grp:setActive(true)
 end
 
 function love.update(dt)
 	LuvKit.update(dt)
 
+	if chk:getCheck() == true then
+		slid1:setActive(true)
+	else
+		slid1:setActive(false)
+	end
+
+	lbl:setValue(dl1:getValue())
+
+	--grp:setX(slid1:getValue())
+
+	b1:setLabel("Button "..slid1:getValue())
 end
 
 function love.draw()
 	love.graphics.setColor(1,1,1)
 	LuvKit.draw()
-	grp:draw()
+	--grp:draw()
+
+	love.graphics.print(slid1:getValue(), x, y, r, sx, sy, ox, oy, kx, ky)
 
 end
 

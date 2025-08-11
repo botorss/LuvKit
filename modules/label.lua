@@ -6,7 +6,7 @@ function label.new(x, y, w, h, txt, alignMode)
 	self.x = x
 	self.y = y
 	self.w = math.max(w or 0, 100)
-	self.h = math.max(h or 0, math.floor(LuvKit.defaultH/3)*2)
+	self.h = math.max(h or 0, LuvKit.defaultH)
 	self.hover = false
 	self.visible = true
 	self.active = true
@@ -23,6 +23,7 @@ function label.new(x, y, w, h, txt, alignMode)
 		clickColor = LuvKit.defaultOptions.clickColor,
 		outline = LuvKit.defaultOptions.outline,
 		radius = LuvKit.defaultOptions.radius,
+		labelBgColor = {.4,.4,.4}
 	}
 	self.callback = nil
 	return self
@@ -30,7 +31,9 @@ end
 
 function label:update(dt)
 	if LuvKit.collision(self.x, self.y, self.w, self.h, love.mouse.getX(), love.mouse.getY(), 1, 1) then
-		self.hover = true
+		if LuvKit.hold == false then
+			self.hover = true
+		end
 	else
 		self.hover = false
 	end
@@ -55,10 +58,10 @@ function label:draw()
 			love.graphics.setLineWidth(1)
 			
 		end
-		love.graphics.setColor(self.options.bgColor)
+		love.graphics.setColor(self.options.labelBgColor)
 		love.graphics.rectangle('fill', self.x, self.y, self.w, self.h, self.options.radius)
 		love.graphics.setColor(self.options.fgColor)
-		love.graphics.printf(self.txt, LuvKit.font, self.x+5, self.y+self.h/2-LuvKit.font:getHeight()/2, self.w-10, self.alignMode)
+		love.graphics.printf(self.txt, LuvKit.font, self.x+5, math.floor(self.y+self.h/2-LuvKit.font:getHeight()/2), self.w-10, self.alignMode)
 	end
 	
 	love.graphics.setColor(1,1,1)

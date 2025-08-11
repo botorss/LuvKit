@@ -31,7 +31,9 @@ end
 
 function button:update(dt)
 	if LuvKit.collision(self.x, self.y, self.w, self.h, love.mouse.getX(), love.mouse.getY(), 1, 1) then
-		self.hover = true
+		if LuvKit.hold == false then
+			self.hover = true
+		end
 	else
 		self.hover = false
 	end

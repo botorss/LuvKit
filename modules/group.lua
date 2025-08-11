@@ -33,7 +33,9 @@ end
 
 function group:update(dt)
 	if LuvKit.collision(self.x, self.y, self.w, self.h, love.mouse.getX(), love.mouse.getY(), 1, 1) then
-		self.hover = true
+		if LuvKit.hold == false then
+			self.hover = true
+		end
 	else
 		self.hover = false
 	end
@@ -101,8 +103,8 @@ function group:setPos(x, y)
 		v:setPos(self.x + self.dElements[k].dx, self.y + self.dElements[k].dy)
 	end
 end
-function group:setX(x)				self.x = x end
-function group:setY(y)				self.y = y end
+function group:setX(x)				self:setPos(x, self.y) end
+function group:setY(y)				self:setPos(self.x, y) end
 function group:setWidth(w)			self.w = w end
 function group:setHeight(h)		self.h = h end
 function group:setActive(bool)		

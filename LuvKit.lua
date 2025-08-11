@@ -4,6 +4,7 @@ love.keyboard.setKeyRepeat(true)
 LuvKit = {}
 LuvKit._registry = setmetatable({}, { __mode = "v" })
 LuvKit.index = true
+LuvKit.hold = false
 LuvKit.modules = {}
 LuvKit.modules.button = require('modules.button')
 LuvKit.modules.droplist = require('modules.droplist')
@@ -56,10 +57,12 @@ function LuvKit.update(dt)
 	for _, v in ipairs(LuvKit._registry) do
 		local is_hovering = false
 		if not hovered_found and v.update then
-			is_hovering = v:update(dt)
-			if is_hovering then
-				hovered_found = true
-			end
+			
+				is_hovering = v:update(dt)
+				if is_hovering then
+					hovered_found = true
+				end
+			--end
 		end
 		if not is_hovering then
 			v.hover = false

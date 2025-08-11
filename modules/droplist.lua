@@ -33,7 +33,9 @@ end
 
 function droplist:update(dt)
 	if LuvKit.collision(self.x, self.y, self.w, self.h + ((self.open and #self.list*self.h) or 0), love.mouse.getX(), love.mouse.getY(), 1, 1) then
-		self.hover = true
+		if LuvKit.hold == false then
+			self.hover = true
+		end
 	else
 		self.hover = false
 		self.open = false

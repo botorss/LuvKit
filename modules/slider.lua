@@ -37,7 +37,9 @@ end
 function slider:update(dt)
 	
 	if LuvKit.collision(self.x, self.y, self.w, self.h, love.mouse.getX(), love.mouse.getY(), 1, 1) or self.hold then
-		self.hover = true
+		if LuvKit.hold == false then
+			self.hover = true
+		end
 	else
 		self.hover = false
 	end
@@ -97,17 +99,22 @@ end
 function slider:mousepressed(x, y, b)
 	if LuvKit.collision(self.x, self.y, self.w, self.h, love.mouse.getX(), love.mouse.getY(), 1, 1) then
 		self.hold = true
+		LuvKit.hold = true
+		self.cy = y
 		love.mouse.setX(self.x+self.slidPos)
 	end
 end
 
 function slider:mousereleased(x, y, b)
 	self.hold = false
+	LuvKit.hold = false
+
 end
 
 function slider:mousemoved(x, y, dx, dy, istouch)
 	if self.active and self.hold then
 		self.slidPos = LuvKit.clamp(0, x - self.x, self.w)
+		--love.mouse.setY(self.cy)
 	end
 end
 -----------------------------------------------------------------
