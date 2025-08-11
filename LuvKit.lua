@@ -3,6 +3,7 @@ love.keyboard.setKeyRepeat(true)
 
 LuvKit = {}
 LuvKit._registry = setmetatable({}, { __mode = "v" })
+LuvKit.index = true
 LuvKit.modules = {}
 LuvKit.modules.button = require('modules.button')
 LuvKit.modules.droplist = require('modules.droplist')
@@ -37,10 +38,13 @@ LuvKit.defaultOptions = {
 }
 
 function LuvKit.u(n) return LuvKit.gridU*n end
+function LuvKit.indexed(bool) LuvKit.index = bool end
 
 function LuvKit.create(element, ...)
 	local temp = LuvKit.modules[element].new(...)
-	table.insert(LuvKit._registry, temp)
+	if LuvKit.index then
+		table.insert(LuvKit._registry, temp)
+	end
 	return temp
 end
 
